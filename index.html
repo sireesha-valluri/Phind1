@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #444;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        .product {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #fff;
+            margin: 10px;
+        }
+        .product img {
+            width: 200px;
+            height: 200px;
+        }
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 200px;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .cart {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: #444;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .cart-item {
+            margin-bottom: 10px;
+        }
+        .cart-item span {
+            margin-right: 10px;
+        }
+        .form-container {
+            margin: 20px;
+        }
+        .form-container input, .form-container select {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Online Shopping</h1>
+    </header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+    </nav>
+    <div class="product">
+        <img src="clothes.jpg" alt="Clothes">
+        <div class="product-details">
+            <h2>Clothes</h2>
+            <p>Description of the clothes.</p>
+            <button onclick="addToCart('Clothes')">Add to Cart</button>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2023 Online Shopping. All rights reserved.</p>
+    </div>
+    <div class="cart" id="cart">
+        <h3>Cart</h3>
+        <div id="cartItems"></div>
+    </div>
+    <div class="form-container">
+        <h2>Billing Information</h2>
+        <form id="billingForm">
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="address" placeholder="Address">
+            <input type="text" id="city" placeholder="City">
+            <input type="text" id="zip" placeholder="Zip Code">
+            <select id="country">
+                <option value="">Select Country</option>
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        let cartItems = [];
+
+        function addToCart(item) {
+            cartItems.push(item);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartElement = document.getElementById('cartItems');
+            cartElement.innerHTML = '';
+            cartItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('cart-item');
+                itemElement.innerHTML = `<span>${item}</span>`;
+                cartElement.appendChild(itemElement);
+            });
+        }
+
+        document.getElementById('billingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Billing information submitted.');
+            // Here you would typically send the form data to a server
+        });
+    </script>
+</body>
+</html>
